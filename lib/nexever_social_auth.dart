@@ -14,7 +14,7 @@ class LoginManager{
   Future<(UserCredential?, dynamic)> login() async {
     (UserCredential?, dynamic) data =  await loginMethod.login();
     if(data.$2.toString().isNotEmpty){
-      loginState.error();
+      loginState.error(data.$2);
     } else {
       loginState.success(data.$1!, data.$2);
     }
