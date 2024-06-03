@@ -16,19 +16,20 @@ class GoogleLogin extends LoginMethod {
   /// - [dynamic]: The error if the login failed, or an empty string if it succeeded.
   Future<(UserCredential?, dynamic)> signInWithGoogle() async {
     try {
-      var googleUser = await RestApis.googleSignIn.signIn();
+      var googleUser = await googleSignIn.signIn();
       GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+      print("EMAIL ====>>>>> ${googleUser.email}");
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      var _res = await RestApis.firebaseAuth.signInWithCredential(credential);
+      var _res = await firebaseAuth.signInWithCredential(credential);
       _res.user?.updateDisplayName(googleUser.displayName ?? '');
-      _res.user?.updateEmail(googleUser.email ?? "");
+      _res.user?.verifyBeforeUpdateEmail(googleUser.email ?? "");
       _res.user?.updatePhotoURL(googleUser.photoUrl ?? "");
       if (_res.user?.email == null) {
-        var _res = await RestApis.firebaseAuth.signInWithCredential(credential);
-        _res.user?.updateEmail(googleUser.email ?? "");
+        var _res = await firebaseAuth.signInWithCredential(credential);
+        _res.user?.verifyBeforeUpdateEmail(googleUser.email ?? "");
       }
       return (_res, "");
     } catch (error, st) {
