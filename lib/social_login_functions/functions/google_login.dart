@@ -17,12 +17,7 @@ class GoogleLogin extends LoginMethod {
   Future<(UserCredential?, dynamic)> signInWithGoogle() async {
     try {
       var googleUser = await RestApis.googleSignIn.signIn();
-      debugPrint("STEP 2");
-      // Step 2
       GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-      print("EMAIL ====>>>>> ${googleUser.email}");
-      debugPrint("STEP 3");
-      // Step 3
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
