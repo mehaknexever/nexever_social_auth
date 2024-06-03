@@ -13,7 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_sign_in: ^6.2.1
   firebase_auth: ^4.19.5
-  sign_in_with_apple: ^6.1.0
+  sign_in_with_apple: ^4.1.0
   flutter_facebook_auth: ^6.2.0
   http: ^1.2.1
 
