@@ -18,6 +18,7 @@ class FaceBookLogin extends LoginMethod {
     var facebookAuth = FacebookAuth.instance;
     var firebaseAuth = FirebaseAuth.instance;
     try {
+      await facebookAuth.logOut();
       final LoginResult result = await facebookAuth.login();
       var credential =
           FacebookAuthProvider.credential(result.accessToken!.token);
