@@ -35,6 +35,7 @@ class GoogleLogin extends LoginMethod {
   Future<(AuthCredential, GoogleSignInAccount)> googleAccountCall() async {
     GoogleSignIn googleSignIn = GoogleSignIn();
     try {
+      await googleSignIn.signOut();
       var googleUser = await googleSignIn.signIn();
       GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
